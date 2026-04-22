@@ -14,12 +14,14 @@ diretamente no terminal, na hora de executar o programa.
 //funcao que converte para maiuscula
 char maiuscula(char c){
 
-//caso seja minuscula (add 32 - equivale a letra maiuscula
+//caso seja minuscula (subtrai 32 - equivale a letra maiuscula
 if (c >= 'a' && c <= 'z'){
-      return c - 32;
+      return c - 32; //dai vira maiuscula
 }
       return c;
 }
+
+//main
 
 int main(){
 
@@ -33,6 +35,8 @@ int main(){
       scanf("%s", ent);
 
       entrada = fopen( ent ,"r");
+      //abro o arquivo para leitura "r"
+
 
       if ( entrada == NULL ){
       //verificacao se houve erro de endereçamento
@@ -45,6 +49,8 @@ int main(){
       scanf("%s", sai);
 
         saida = fopen( sai ,"r+");
+        //abro o arquivo para escrita "r+" 
+        //(! os aquivos já existem,só priciso abri-los)
 
       if ( saida == NULL ){
       //verificacao se houve erro de endereçamento
@@ -59,9 +65,13 @@ int main(){
 
       while(!feof(entrada)){//ENQUANTO NAO CHEGAR NO FINAL DO ARQUIVO,
       //CONTINUA LENDO
-      guarda = maiuscula(guarda);
+      guarda = maiuscula(guarda); 
+      //a letra foi convertida para maiuscula 
+      //e eu armazeno ela na variavel aux "guarda"
 
-      fputc(guarda,saida);
+      fputc(guarda,saida); // jogo o que a variavel aux "guarda" armazena 
+      //para meu arquivo de saida
+
       guarda = fgetc(entrada);
 
       }

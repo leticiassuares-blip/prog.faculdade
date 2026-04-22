@@ -3,7 +3,7 @@ Seu programa deve calcular e exibir a quantidade de vezes que cada uma
 das vogais aparecem no arquivo (deve ser case insensitive e não precisa
 incluir vogais acentuadas na contagem).
 
-Ideia principal do programa
+Ideia principal do programa:
 Você não precisa criar o arquivo dentro do programa
 O arquivo já deve existir
 O usuário só informa o nome dele
@@ -22,7 +22,7 @@ int main(){
     scanf("%s",nome);
 
     arquivo = fopen( nome ,"r+");
-    //"r+" abrir o arquivo de texto para leitura e escrita
+    //"r+" abrir o arquivo de texto para leitura e escrita ou "r" pq só faz a leitura
 
     if( arquivo == NULL){
         
@@ -64,7 +64,7 @@ int vetor[5]={ 0 , 0 , 0 , 0 , 0};
         
             vetor[4]++;
     }
-        c= fgetc(arquivo);//faz a leitura do prox caracter e guarda em c
+        c = fgetc(arquivo);//faz a leitura do prox caracter e guarda em c
 
     }
 
@@ -73,7 +73,7 @@ int vetor[5]={ 0 , 0 , 0 , 0 , 0};
     printf("\n i: %d", vetor[2]);
     printf("\n o: %d", vetor[3]);
     printf("\n u: %d", vetor[4]);
-
+    
     fclose(arquivo);
     return 0;
 

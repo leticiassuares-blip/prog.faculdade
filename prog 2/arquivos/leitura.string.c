@@ -23,7 +23,12 @@ ou 79 caracteres*/
 
 //exemplo: digito "casa"
 // e como  char linha[MAX]; é um vetor de caracteres (char)
-//linha[5]={'c','a','s','a','\0'}
+/*linha[5]={'c','a','s','a','\0'}
+
+Lê uma linha do arquivo
+Enquanto não acabar:
+imprime na tela
+lê a próxima linha*/
 
 fgets(linha, MAX, stdin); //lê o teclado - linha → ['c','a','s','a','\0']
 
