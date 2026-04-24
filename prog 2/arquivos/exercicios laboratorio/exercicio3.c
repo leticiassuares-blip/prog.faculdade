@@ -11,13 +11,17 @@ retornar a o trecho e o restante da linha (imprimir)*/
 
 
 #include <stdio.h>
+#include <string.h>
 #define MAX 80
 
 int main(){
 
       char linha[80];
-      char nome[50];//vetor de caracteres
+      char trecho[80];//nome do trecho
+      char nome[50];//vetor de caracteres-nome do arquivo
       FILE *arquivo;
+      char *encontra;//ponteiro para usar a funcao strstr
+      int num = 1;//indica o numero da linha
       
       printf("Insira o nome do arquivo: ");
       scanf("%s" , nome);
@@ -30,23 +34,23 @@ int main(){
             return 1;
       }
 
-      char trecho[80];
-
       printf("Indique o texto que você quer encontrar:");
       scanf("%s",trecho);
 
 //programa precisa ler strings para identificar o trecho
-
+     
 fgets(linha,MAX,arquivo);
 
       while(!feof(arquivo)){
 
-            if(){
-                  puts(linha);
+      encontra = strstr(linha ,trecho);
+
+            if(encontra != NULL){
+                printf("\n%d %s\n",num , encontra);
       }
             
             fgets(linha,MAX,arquivo);
-
+                  num ++;//a cada fgts é uma linha nova lida
       }
       fclose(arquivo);
       return 0;
