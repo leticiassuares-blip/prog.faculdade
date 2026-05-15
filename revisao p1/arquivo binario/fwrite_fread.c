@@ -1,5 +1,7 @@
 //fwrite(buffer, tamanho, quantidade, arquivo);
 //buffer-Endereço da variável que será gravada.
+//tamanho-Quantos bytes cada elemento possui.
+//quantidade-Quantos elementos escrever.
 
 #include <stdio.h>
 
@@ -19,7 +21,7 @@ int main() {
     p.idade = 20;
     p.altura = 1.75;
 
-    arq = fopen("dados.txt", "wb");
+    arq = fopen("dados.bin", "wb");
 
     fwrite(&p, sizeof(Pessoa), 1, arq);
 
@@ -40,7 +42,7 @@ int main()
 
 FILE *parq;
 Tpessoa p;
-if (!(parq = fopen ("arquivo_bin.dat", "rb")))
+if (!(parq = fopen ("dados.bin", "rb")))
 
 return -1;
 
