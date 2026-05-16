@@ -7,6 +7,7 @@ valor). A função deve alterar o valor do salário
 acrescentando o percentual correspondente
 de aumento. Mostre como a função poderia
 ser chamada a partir da função main.*/
+
 #include <stdio.h>
 void aumento ( int *salarioAtual , float percentual){
 

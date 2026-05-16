@@ -17,8 +17,8 @@ int conta =0;
 
 for (int i =0 ; *(nome +i) != '\0'  ; i++){
 
-      if(nome[i] == 'a' || nome[i] == 'e' || nome[i] == 'i'
-       || nome[i] == 'o' ||nome[i] == 'u' ){
+      if(*(nome +i) == 'a' || *(nome +i) == 'e' || *(nome +i) == 'i'
+       || *(nome +i) == 'o' ||*(nome +i) == 'u' ){
 
             conta ++;
       }
@@ -32,7 +32,9 @@ int main (){
 
       printf(" Insira a palavra para contagem de vogais:");
       scanf( "%s" , palavra);
-      printf("Numero de vogais desta palavra %d " , numeroVogais(&palavra));
+      int num;
+      num = numeroVogais(&palavra);
+      printf("Numero de vogais desta palavra %d " , num);
       return 0;
 }
 
