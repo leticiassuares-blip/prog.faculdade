@@ -10,6 +10,7 @@ deve ser atualizada pela função com a hora e o minuto atuais.
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
  typedef struct {
 
@@ -26,10 +27,9 @@ deve ser atualizada pela função com a hora e o minuto atuais.
 
 void tempoatual(int percorrido, t_Momento *momento){
 
- /*t_Momento x;
- momento = &x;*/
- (*momento).hora = (percorrido / 60 ); // momento->hora
- (*momento).minuto =  ((percorrido % 60) *60) ; //// momento->minuto
+
+ (*momento).hora = (percorrido / 60 ) ; // momento->hora
+ (*momento).minuto =  (percorrido % 60)  ; //// momento->minuto
 
 }
 
@@ -47,8 +47,7 @@ caso de empate, mostre o primeiro momento.*/
 
 int main(){
 
-t_Momento *m1;
-t_Momento *m2; 
+t_Momento m_Atual;
 
 int m1_hora;
 int m1_minuto;
@@ -57,21 +56,41 @@ int m2_minuto;
 int tempo_percorrido;
 
       printf("Primeira hora:");
-      scanf("%d\n" , &m1_hora);
+      scanf("%d" , &m1_hora);
 
       printf("Primeiro minuto:");
-      scanf("%d\n" , &m1_minuto);
+      scanf("%d" , &m1_minuto);
 
       printf("Segunda hora:");
-      scanf("%d\n" , &m2_hora);
+      scanf("%d" , &m2_hora);
 
       printf("Segundo minuto:");
-      scanf("%d\n" , &m2_minuto);
+      scanf("%d" , &m2_minuto);
 
       printf("Tempo em minutos percorrido desde o inicio do dia :");
-      scanf("%d\n" , &tempo_percorrido);
+      scanf("%d" , &tempo_percorrido);
 
-      tempoatual (tempo_percorrido, m1 );
+      printf("%d:%d\n" , m1_hora, m1_minuto );
+      printf("%d:%d\n" , m2_hora, m2_minuto );
+
+      tempoatual (tempo_percorrido, &m_Atual );
+
+      int m1 = ( m1_hora *60 ) + m1_minuto;
+      int m2 = ( m2_hora *60 ) + m2_minuto;
+
+      printf("horario mais proximo ");
+
+            if( abs(tempo_percorrido - m1) == abs(tempo_percorrido - m2) ){
+
+                   printf("%d:%d\n" , m1_hora, m1_minuto );
+
+
+      }else if ( abs(tempo_percorrido - m1) > abs (tempo_percorrido - m2)){
+
+            printf("%d:%d\n" , m2_hora, m2_minuto );
+      }else{
+            printf("%d:%d\n" , m1_hora, m1_minuto );
+      }
 
 
 return 0;
