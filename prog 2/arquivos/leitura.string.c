@@ -89,3 +89,36 @@ casa
 👉 fputs → escreve string
 👉 puts → imprime string*/
 
+int recupera_txt(FILE *ft, CURSO *c){
+
+      int rec;
+      rec = fscanf(ft , "%[ˆ-]- %d/%d %ld" , &(*c).nome  , &(*c).criacao.mes , &(*c).criacao.ano , &(*c).egressos );
+
+            if (rec != fepf(ft)){
+
+                  return 0;
+
+            } else 
+            return 1;
+
+
+}
+
+int grava_bin_txt(FILE *ft, FILE *fb){
+
+int i= 0 ; 
+CURSO *c;
+
+      while (!feof(fb)){
+            while (!feof(ft)){
+
+                  recupera_txt(ft, *c);
+                  fprintf (fb ,"%[ˆ-]- %d/%d %ld" , (*c).nome  , (*c).criacao.mes , (*c).criacao.ano , (*c).egressos );
+                  i++;
+
+      }
+
+      }
+
+return i;
+}
