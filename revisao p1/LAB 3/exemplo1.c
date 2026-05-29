@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-int main ()
-{
+
+int main (){
 
 int tam,i;
-char *g[3];
+char *g[3];// vetor de ponteiros com 3 caracteres
 
 tam = sizeof(char); //calcula o tamanho de um char em bytes
 
