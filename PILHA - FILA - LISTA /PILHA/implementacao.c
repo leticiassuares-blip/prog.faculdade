@@ -19,7 +19,6 @@ TIPOCHAVE chave; // TIPOCHAVE é int
 
 //ex: REGISTRO r ; r.chave = 3;
 
-
 typedef struct aux {
 
 REGISTRO reg;//cada ELEMENTO tem um REGISTRO
