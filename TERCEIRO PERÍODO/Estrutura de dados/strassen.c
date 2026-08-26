@@ -14,22 +14,7 @@ void multipComum ( int N , int *A , int *B ,int *C1){
 
       }
       *(C1 + ( (i * N) + j)) = soma ;
-}
-}
-}
-
-int comparaResultado ( int N , int *C1 , int *C2){
-
-for( int i = 0 ; i < N ; i++){
-      for( int j = 0 ; j < N ; j++ ){
-
-            if( (*(C1 + ( (i * N) + j))) != (*(C2 + ( (i * N) + j))) ){
- 
-                        return 0;
-            }
-      }
-}
-return 1;
+}}
 }
 
 void multipStrassen ( int N ,int *A , int *B ,int *C2){
@@ -39,7 +24,6 @@ void multipStrassen ( int N ,int *A , int *B ,int *C2){
             *C2 = (*A) * (*B);
             return ;
  }
-
 //nao eh o caso base
 
 //matrizes temporarias
@@ -56,7 +40,6 @@ int *y = (int *) malloc(N/2 * N/2 * sizeof(int));
 printf ("Erro de alocacao de memoria\n"); 
       return;       
 }
-
 //strassem
 int *M1 = (int *) malloc(N/2 * N/2 * sizeof(int));
      
@@ -107,7 +90,6 @@ printf ("Erro de alocacao de memoria\n");
       return;
 }
 
-
    for(int i = 0 ; i < N/2 ;i++){
             for(int j = 0 ; j < N/2 ;j++){
 
@@ -138,7 +120,6 @@ for(int i = 0 ; i < N/2 ;i++){
 }
 multipStrassen(N/2 , x , y , M3);
 
- 
 for(int i = 0 ; i < N/2 ;i++){
             for(int j = 0 ; j < N/2 ;j++){
 
@@ -200,7 +181,18 @@ free(M4);
 free(M5);
 free(M6);
 free(M7);
+}
 
+int comparaResultado ( int N , int *C1 , int *C2){
+
+for( int i = 0 ; i < N ; i++){
+      for( int j = 0 ; j < N ; j++ ){
+
+            if( (*(C1 + ( (i * N) + j))) != (*(C2 + ( (i * N) + j))) ){
+ 
+                        return 0;
+            }}}//else
+return 1;
 }
 
 int main( int argc , char *argv[]){
