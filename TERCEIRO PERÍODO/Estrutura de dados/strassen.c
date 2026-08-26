@@ -28,66 +28,32 @@ void multipStrassen ( int N ,int *A , int *B ,int *C2){
 
 //matrizes temporarias
 int *x = (int *) malloc(N/2 * N/2 * sizeof(int));
-      
-      if (x == NULL){
-printf ("Erro de alocacao de memoria\n");  
-      return;  
-}
-
 int *y = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (y == NULL){
-printf ("Erro de alocacao de memoria\n"); 
-      return;       
-}
 //strassem
 int *M1 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M1 == NULL){
-printf ("Erro de alocacao de memoria\n");
-      return;  
-}
-
 int *M2 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M2 == NULL){
-printf ("Erro de alocacao de memoria\n");
-            return;
-}
-
 int *M3 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M3 == NULL){
-printf ("Erro de alocacao de memoria\n");
-            return;
-}
-
 int *M4 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M4 == NULL){
-printf ("Erro de alocacao de memoria\n");
-            return;
-}
-
 int *M5 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M5 == NULL){
-printf ("Erro de alocacao de memoria\n");
-            return;
-}
-
 int *M6 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M6 == NULL){
-printf ("Erro de alocacao de memoria\n");
-            return;
-}
-
 int *M7 = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (M7 == NULL){
+
+      if(x==NULL|| y==NULL || M1==NULL|| M2== NULL|| M3==NULL|| M4 ==NULL ||
+            M5==NULL||  M6 ==NULL  ||M7 == NULL){
+
 printf ("Erro de alocacao de memoria\n");
-      return;
+
+free(x);
+free(y);
+
+free(M1);
+free(M2);
+free(M3);
+free(M4);
+free(M5);
+free(M6);
+free(M7);
+return;
 }
 
    for(int i = 0 ; i < N/2 ;i++){
