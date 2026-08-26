@@ -2,47 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-/*argc -> representa a quantidade de argumentos passados
-argv -> representa quais foram os argumentos passados
-argv[0] -> nome do programa 
-
-argc == 3 
-argv[0] = ""./strassem"
-argv[1] = "-k"
-argv[2] = 1024 (potência de 2, representará o tamanho da matriz , N = 1024)
-
-//verificar se é potencia de 2(binario)
-N       = 1000
-N - 1   = 0111
-
-N & (N-1) = 0000
-
-
-ROTEIRO MAIN
-
-1. Receber argumentos
-2. Verificar se os argumentos estão corretos
-3. Obter N
-4. Verificar se N é potência de 2
-5. Alocar/criar A e B
-6. Preencher A e B com números aleatórios
-
-7. Medir início
-8. Chamar multiplicação tradicional
-9. Medir fim
-10. Calcular tempo tradicional
-
-11. Medir início
-12. Chamar Strassen
-13. Medir fim
-14. Calcular tempo Strassen
-
-15. Comparar resultado tradicional com resultado Strassen
-
-16. Mostrar os resultados/tempos
-17. Liberar memória
-
-*/
 void multipComum ( int N , int *A , int *B ,int *C1){
 
       for(int i = 0 ; i < N ;i++){
@@ -55,98 +14,192 @@ void multipComum ( int N , int *A , int *B ,int *C1){
 
       }
       *(C1 + ( (i * N) + j)) = soma ;
-}}
 }
-/*falta
-Matriz A e B
-      ↓
-dividir em 4 blocos
-      ↓
-fazer somas/subtrações entre blocos
-      ↓
-7 multiplicações
-      ↓
-combinar os 7 resultados
-      ↓
-C
-*/
-void multipStrassem ( int N ,int *A , int *B ,int *C2){
+}
+}
 
+int comparaResultado ( int N , int *C1 , int *C2){
+
+for( int i = 0 ; i < N ; i++){
+      for( int j = 0 ; j < N ; j++ ){
+
+            if( (*(C1 + ( (i * N) + j))) != (*(C2 + ( (i * N) + j))) ){
+ 
+                        return 0;
+            }
+      }
+}
+return 1;
+}
+
+void multipStrassen ( int N ,int *A , int *B ,int *C2){
+
+      //caso base
+  if(N == 1 ){
+            *C2 = (*A) * (*B);
+            return ;
+ }
+
+//nao eh o caso base
+
+//matrizes temporarias
 int *x = (int *) malloc(N/2 * N/2 * sizeof(int));
       
       if (x == NULL){
-printf ("Erro de alocacao de memoria\n");    
+printf ("Erro de alocacao de memoria\n");  
+      return;  
 }
+
 int *y = (int *) malloc(N/2 * N/2 * sizeof(int));
      
       if (y == NULL){
-printf ("Erro de alocacao de memoria\n");      
+printf ("Erro de alocacao de memoria\n"); 
+      return;       
 }
-int *z = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (z == NULL){
-printf ("Erro de alocacao de memoria\n");
-}
-int *w = (int *) malloc(N/2 * N/2 * sizeof(int));
-     
-      if (w == NULL){
-printf ("Erro de alocacao de memoria\n");
-}
+
+//strassem
 int *M1 = (int *) malloc(N/2 * N/2 * sizeof(int));
      
       if (M1 == NULL){
 printf ("Erro de alocacao de memoria\n");
+      return;  
 }
+
+int *M2 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M2 == NULL){
+printf ("Erro de alocacao de memoria\n");
+            return;
+}
+
+int *M3 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M3 == NULL){
+printf ("Erro de alocacao de memoria\n");
+            return;
+}
+
+int *M4 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M4 == NULL){
+printf ("Erro de alocacao de memoria\n");
+            return;
+}
+
+int *M5 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M5 == NULL){
+printf ("Erro de alocacao de memoria\n");
+            return;
+}
+
+int *M6 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M6 == NULL){
+printf ("Erro de alocacao de memoria\n");
+            return;
+}
+
+int *M7 = (int *) malloc(N/2 * N/2 * sizeof(int));
+     
+      if (M7 == NULL){
+printf ("Erro de alocacao de memoria\n");
+      return;
+}
+
 
    for(int i = 0 ; i < N/2 ;i++){
             for(int j = 0 ; j < N/2 ;j++){
 
 (*(x + ( (i * N/2) + j))) = (*(A + ( (i * N) + j))) + (*(A + ( ((i+N/2) * N) + (j+N/2))));
 (*(y + ( (i * N/2) + j))) = (*(B + ( (i * N) + j))) + (*(B + ( ((i+N/2) * N) + (j+N/2))));
+            }
+      }
+multipStrassen(N/2 , x , y , M1);
  
-multipComum(N/2 , x , y , M1);
+
+for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
 
 (*(x + ( (i * N/2) + j))) = (*(A + ( ((i+N/2) * N) + j))) + (*(A + ( ((i+N/2) * N) + (j+N/2))));
 (*(y + ( (i * N/2) + j))) = (*(B + ( (i * N) + j)));
 
-multipComum(N/2 , x , y , M1);
+            }
+      }
+multipStrassen(N/2 , x , y , M2);
+ 
+
+for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
 
 (*(x + ( (i * N/2) + j))) = (*(A + ( (i * N) + j)));
 (*(y + ( (i * N/2) + j))) = (*(B + ( (i * N) + (j+N/2)))) - (*(B + ( ((i+N/2) * N) + (j+N/2))));
+      }
+}
+multipStrassen(N/2 , x , y , M3);
+
  
-multipComum(N/2 , x , y , M1);
+for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
 
-(*(x + ( (i * N/2) + j))) =  (*(A + ( ((i+N/2) * N) + j)));
+(*(x + ( (i * N/2) + j))) =  (*(A + ( ((i+N/2) * N) + (j+N/2))));
 (*(y + ( (i * N/2) + j))) = (*(B + ( ((i+N/2) * N) + j))) - (*(B + ( (i * N) + j)));
+            }}
+multipStrassen(N/2 , x , y , M4);
 
-multipComum(N/2 , x , y , M1);
+for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
 
 (*(x + ( (i * N/2) + j))) = (*(A + ( (i * N) + j))) + (*(A + ( (i * N) + (j+N/2))));
 (*(y + ( (i * N/2) + j))) =  (*(B + ( ((i+N/2) * N) + (j+N/2))));
+            }}
+multipStrassen(N/2 , x , y , M5);
 
-multipComum(N/2 , x , y , M1);
+for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
 
 (*(x + ( (i * N/2) + j))) = (*(A + ( ((i+N/2) * N) + j))) - (*(A + ( (i * N) + j)));
 (*(y + ( (i * N/2) + j))) = (*(B + ( (i * N) + j))) + (*(B + ( (i * N) + (j+N/2))));
+            }}
 
-multipComum(N/2 , x , y , M1);
+multipStrassen(N/2 , x , y , M6);
 
-(*(x + ( (i * N/2) + j))) = (*(A + ( ((i+N/2) * N) + j))) - (*(A + ( ((i+N/2) * N) + (j+N/2))));
-(*(y + ( (i * N/2) + j))) = (*(B + ( (i * N) + (j+N/2)))) + (*(B + ( ((i+N/2) * N) + (j+N/2))));
-
-multipComum(N/2 , x , y , M1);
-
-      }
-}
-
-/*
- for(int i = 0 ; i < N/2 ;i++){
+for(int i = 0 ; i < N/2 ;i++){
             for(int j = 0 ; j < N/2 ;j++){
-       (*(C2 + ( (i * N/2) + j))) = (*(M1 + ( (i * N/2) + j)));
+
+(*(x + ( (i * N/2) + j))) = (*(A + ( i * N) + (j+N/2))) - (*(A + ( ((i+N/2) * N) + (j+N/2))));
+(*(y + ( (i * N/2) + j))) = (*(B + ( ((i+N/2) * N) + j))) + (*(B + ( ((i+N/2) * N) + (j+N/2))));
+            
+}
 
       }
-}
-*/
+multipStrassen(N/2 , x , y , M7);
+
+     for(int i = 0 ; i < N/2 ;i++){
+            for(int j = 0 ; j < N/2 ;j++){
+
+      (*(C2 + ((i * N) + j ))) = (*(M1 + ((i * N/2) + j ))) +(*(M4 + ((i * N/2) + j ))) 
+      - (*(M5 + ((i * N/2) + j ))) +(*(M7 + ((i * N/2) + j )));
+
+      (*(C2 + (((i+N/2) * N) + j ))) = (*(M2 + ((i * N/2) + j )))+(*(M4 + ((i * N/2) + j )));
+
+      (*(C2 + ((i * N) + (j+N/2 )))) =  (*(M3 + ((i * N/2) + j )))+ (*(M5 + ((i * N/2) + j )));
+
+      (*(C2 + (((i+N/2) * N) + (j+N/2) ))) = (*(M1 + ((i * N/2) + j ))) -(*(M2 + ((i * N/2) + j ))) 
+      +(*(M3 + ((i * N/2) + j ))) +(*(M6 + ((i * N/2) + j )));
+
+            }} 
+
+free(x);
+free(y);
+
+free(M1);
+free(M2);
+free(M3);
+free(M4);
+free(M5);
+free(M6);
+free(M7);
 
 }
 
@@ -161,7 +214,7 @@ int main( int argc , char *argv[]){
       N = atoi( argv[2]); //transforma texto em numero
 
       //verificar se é potencia de 2
-      if(( N & (N-1) ) > 0){
+      if(  N <= 0 ||( N & (N-1) ) != 0){
 
       printf("%d : Valor inválido!\n O valor inserido não é uma potência de 2\n" , N);
             return -1;
@@ -230,9 +283,18 @@ printf ("Erro de alocacao de memoria\n");
       return -1;
 }
 
-multipComum(N,A,B,C1);
+//medicao do tempo
+clock_t inicio , fim;
+double tempoMcomum , tempoStrassen;
 
-printf("C1:\n");
+inicio = clock();
+multipComum(N,A,B,C1);
+fim = clock();
+
+tempoMcomum = (double) (fim - inicio ) /CLOCKS_PER_SEC;
+printf("Tempo de execução com a multiplicação comum : %f segundos" ,tempoMcomum );
+
+printf("\nC1:\n");
 
       for(int i = 0 ; i < N ;i++){
             for(int j = 0 ; j < N ;j++){
@@ -242,9 +304,16 @@ printf("C1:\n");
       printf("\n");
 }
 
-multipStrassem(N ,A,B,C2);
 
-printf("C2:\n");
+inicio = clock();
+multipStrassen(N ,A,B,C2);
+fim = clock();
+
+tempoStrassen= (double) (fim - inicio ) /CLOCKS_PER_SEC;
+printf("Tempo de execução com a multiplicação por Strassen : %f segundos" ,tempoStrassen );
+
+
+printf("\nC2:\n");
 
       for(int i = 0 ; i < N ;i++){
             for(int j = 0 ; j < N ;j++){
@@ -253,33 +322,13 @@ printf("C2:\n");
       }
       printf("\n");
 }
-/*
- preencher A
 
-preencher B
-marca o inicio
-chamar funcao multip. por metodo comum
-marca o fim
-
-marca o inicio
-chamar funcao multip. por metodo  de strassem
-marca o fim
-
-compara os resultados
-saber o tempo de execucao das multiplicacoes
-
-funcao strassem
-marcar tempo
-comparar os resultados finais
-
-*/
-//liberando memória
+printf("As matrizes resultado de cada método de Multiplicacao sao iguais?\n(TRUE-> 1 ou FALSE->0) : %d", comparaResultado( N , C1,C2));
 
 free(A);
 free(B);
 free(C1);
 free(C2);
-
       return 0;
       
 }
